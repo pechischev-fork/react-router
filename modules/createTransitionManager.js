@@ -13,8 +13,29 @@ function hasAnyProperties(object) {
   return false
 }
 
-export default function createTransitionManager(history, routes) {
+export default function createTransitionManager(history, _routes) {
   let state = {}
+  let routes = _routes
+
+  function setRoutes(_routes, callback) {
+    routes = _routes
+
+    match(history.getCurrentLocation(), function (error, redirectLocation, nextState) {
+      if (error) {
+        callback(error)
+      } else if (redirectLocation) {
+        history.replace(redirectLocation)
+      } else if (nextState) {
+        callback(null, nextState)
+      } else {
+        warning(
+          false,
+          'Location "%s" did not match any routes',
+          location.pathname + location.search + location.hash
+        )
+      }
+    })
+  }
 
   const { runEnterHooks, runChangeHooks, runLeaveHooks } = getTransitionUtils()
 
@@ -252,6 +273,7 @@ export default function createTransitionManager(history, routes) {
 
   return {
     isActive,
+    setRoutes,
     match,
     listenBeforeLeavingRoute,
     listen

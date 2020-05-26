@@ -130,6 +130,31 @@ const Router = createReactClass({
       this._unlisten()
   },
 
+  componentDidUpdate(previousProps) {
+    const { routes, children } = this.props
+
+    const newRoutes = createRoutes(routes || children)
+    const prevRoutes = createRoutes(previousProps.routes || previousProps.children)
+
+    if (JSON.stringify(prevRoutes) === JSON.stringify(newRoutes)) {
+      return
+    }
+    this.transitionManager.setRoutes(newRoutes, (error, state) => {
+      if (error) {
+        this.handleError(error)
+      } else {
+        // Keep the identity of this.router because of a caveat in ContextUtils:
+        // they only work if the object identity is preserved.
+
+        if (JSON.stringify(this.state.routes) !== JSON.stringify(state.routes)) {
+          const newState = { ...this.state, routes: state.routes }
+          assignRouterState(this.router, newState)
+          this.setState(newState)
+        }
+      }
+    })
+  },
+
   render() {
     const { location, routes, params, components } = this.state
     const { createElement, render, ...props } = this.props

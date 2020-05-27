@@ -143,7 +143,7 @@ const Router = createReactClass({
         // they only work if the object identity is preserved.
 
         if (JSON.stringify(this.state.routes) !== JSON.stringify(state.routes)) {
-          const newState = { ...this.state, routes: state.routes }
+          const newState = { ...this.state, routes: state.routes, components: state.components }
           assignRouterState(this.router, newState)
           this.setState(newState)
         }

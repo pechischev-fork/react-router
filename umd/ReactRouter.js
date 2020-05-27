@@ -3474,7 +3474,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // they only work if the object identity is preserved.
 
 	        if (JSON.stringify(_this2.state.routes) !== JSON.stringify(state.routes)) {
-	          var newState = _extends({}, _this2.state, { routes: state.routes });
+	          var newState = _extends({}, _this2.state, { routes: state.routes, components: state.components });
 	          (0, _RouterUtils.assignRouterState)(_this2.router, newState);
 	          _this2.setState(newState);
 	        }

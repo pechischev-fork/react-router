@@ -147,23 +147,7 @@ const Router = createReactClass({
         // they only work if the object identity is preserved.
 
         if (JSON.stringify(this.state.routes) !== JSON.stringify(state.routes)) {
-          const maxLength = Math.max(this.state.components.length, state.components.length)
-          const components = this.state.components
-          let hasChanged = false
-
-          for (let i = 0; i < maxLength; ++i) {
-            let el1 = components[i]
-            let el2 = state.components[i]
-
-            if (!el1) {
-              continue
-            }
-
-            if (el1.toString() !== el2.toString()) {
-              hasChanged = true
-            }
-          }
-
+          const hasChanged = this.state.components.toString() !== state.components.toString()
           const newState = { ...this.state, routes: state.routes }
 
           if (hasChanged) {

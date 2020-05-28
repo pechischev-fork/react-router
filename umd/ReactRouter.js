@@ -3352,23 +3352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // they only work if the object identity is preserved.
 
 	        if (JSON.stringify(_this2.state.routes) !== JSON.stringify(state.routes)) {
-	          var maxLength = Math.max(_this2.state.components.length, state.components.length);
-	          var components = _this2.state.components;
-	          var hasChanged = false;
-
-	          for (var i = 0; i < maxLength; ++i) {
-	            var el1 = components[i];
-	            var el2 = state.components[i];
-
-	            if (!el1) {
-	              continue;
-	            }
-
-	            if (el1.toString() !== el2.toString()) {
-	              hasChanged = true;
-	            }
-	          }
-
+	          var hasChanged = _this2.state.components.toString() !== state.components.toString();
 	          var newState = _extends({}, _this2.state, { routes: state.routes });
 
 	          if (hasChanged) {

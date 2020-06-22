@@ -3318,15 +3318,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    });
 	  },
-
-
-	  // this method will be updated to UNSAFE_componentWillReceiveProps below for React versions >= 16.3
-	  /* istanbul ignore next: sanity check */
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	     true ? (0, _routerWarning2.default)(nextProps.history === this.props.history, 'You cannot change <Router history>; it will be ignored') : void 0;
-
-	     true ? (0, _routerWarning2.default)((nextProps.routes || nextProps.children) === (this.props.routes || this.props.children), 'You cannot change <Router routes>; it will be ignored') : void 0;
-	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    if (this._unlisten) this._unlisten();
 	  },
@@ -3397,9 +3388,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 	if (prefixUnsafeLifecycleMethods) {
-	  Router.prototype.UNSAFE_componentWillReceiveProps = Router.prototype.componentWillReceiveProps;
 	  Router.prototype.UNSAFE_componentWillMount = Router.prototype.componentWillMount;
-	  delete Router.prototype.componentWillReceiveProps;
 	  delete Router.prototype.componentWillMount;
 	}
 

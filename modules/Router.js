@@ -110,21 +110,6 @@ const Router = createReactClass({
     })
   },
 
-  // this method will be updated to UNSAFE_componentWillReceiveProps below for React versions >= 16.3
-  /* istanbul ignore next: sanity check */
-  componentWillReceiveProps(nextProps) {
-    warning(
-      nextProps.history === this.props.history,
-      'You cannot change <Router history>; it will be ignored'
-    )
-
-    warning(
-      (nextProps.routes || nextProps.children) ===
-        (this.props.routes || this.props.children),
-      'You cannot change <Router routes>; it will be ignored'
-    )
-  },
-
   componentWillUnmount() {
     if (this._unlisten)
       this._unlisten()
@@ -186,9 +171,7 @@ const Router = createReactClass({
 })
 
 if (prefixUnsafeLifecycleMethods) {
-  Router.prototype.UNSAFE_componentWillReceiveProps = Router.prototype.componentWillReceiveProps
   Router.prototype.UNSAFE_componentWillMount = Router.prototype.componentWillMount
-  delete Router.prototype.componentWillReceiveProps
   delete Router.prototype.componentWillMount
 }
 
